@@ -45,7 +45,7 @@ func (q *Queries) DeleteEntry(ctx context.Context, id int64) error {
 	return err
 }
 
-const getAllEntriesOfAccount = `-- name: GetAllEntriesOfAccount :many
+const getEntriesOfAccount = `-- name: GetEntriesOfAccount :many
 SELECT id, account_id, amount, created_at FROM entries
 WHERE account_id = $1
 ORDER BY id
@@ -53,14 +53,14 @@ LIMIT $2
 OFFSET $3
 `
 
-type GetAllEntriesOfAccountParams struct {
+type GetEntriesOfAccountParams struct {
 	AccountID int64 `json:"account_id"`
 	Limit     int32 `json:"limit"`
 	Offset    int32 `json:"offset"`
 }
 
-func (q *Queries) GetAllEntriesOfAccount(ctx context.Context, arg GetAllEntriesOfAccountParams) ([]Entry, error) {
-	rows, err := q.db.QueryContext(ctx, getAllEntriesOfAccount, arg.AccountID, arg.Limit, arg.Offset)
+func (q *Queries) GetEntriesOfAccount(ctx context.Context, arg GetEntriesOfAccountParams) ([]Entry, error) {
+	rows, err := q.db.QueryContext(ctx, getEntriesOfAccount, arg.AccountID, arg.Limit, arg.Offset)
 	if err != nil {
 		return nil, err
 	}

@@ -10,7 +10,7 @@ returning *;
 SELECT * FROM entries
 WHERE id = $1 LIMIT 1;
 
--- name: GetAllEntriesOfAccount :many
+-- name: GetEntriesOfAccount :many
 SELECT * FROM entries
 WHERE account_id = $1
 ORDER BY id
