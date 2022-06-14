@@ -20,9 +20,7 @@ func CreateRandomTransfer(t *testing.T, account1, account2 *Account) Transfer {
 	require.Equal(t, args.ToAccountID, transfer.ToAccountID)
 	return transfer
 }
-func Get2RandomAccounts(t *testing.T) (Account, Account) {
-	return createRandomAccount(t), createRandomAccount(t)
-}
+
 func TestCreateTransfer(t *testing.T) {
 	account1, account2 := Get2RandomAccounts(t)
 	CreateRandomTransfer(t, &account1, &account2)
