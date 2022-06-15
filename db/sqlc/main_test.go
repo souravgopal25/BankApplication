@@ -3,6 +3,7 @@ package db
 import (
 	"database/sql"
 	_ "github.com/lib/pq"
+	"github.com/souravgopal25/BankApplication/util"
 	"log"
 	"os"
 	"testing"
@@ -11,14 +12,13 @@ import (
 var testQueries *Queries
 var testDB *sql.DB
 
-const (
-	dbDriver = "postgres"
-	dbSource = "postgresql://root:pass@localhost:5432/simple_bank?sslmode=disable"
-)
-
 func TestMain(m *testing.M) {
+	config, err1 := util.LoadConfig("../..")
+	if err1 != nil {
+		log.Fatalln("Cannot Load config file", err1)
+	}
 	var err error
-	testDB, err = sql.Open(dbDriver, dbSource)
+	testDB, err = sql.Open(config.DBDriver, config.DBSource)
 	if err != nil {
 		log.Fatalln("Cannot create to db: ", err)
 	}
