@@ -69,7 +69,6 @@ func TestGetAccountAPI(t *testing.T) {
 
 			},
 		},
-		//TODO ADD MORE CASES
 	}
 	for i := range testCases {
 		tc := testCases[i]
